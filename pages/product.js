@@ -8,7 +8,8 @@ export class Product {
         this.productHeading = page.getByRole('heading', { name: 'Miecz Runiczny' });  
         this.buyButton = page.getByTestId('buy-btn-1');  
         this.cartButton = page.getByTestId('cart-button');
-        this.cartBuyButton = page.getByTestId('cart-buy');  
+        this.cartBuyButton = page.getByTestId('cart-buy'); 
+        this.cartPanel = page.getByTestId('cart-panel'); 
 
     }
 
@@ -25,11 +26,11 @@ export class Product {
 
         async showCart() {
             await this.cartButton.click();
-            await expect(this.page.getByTestId('cart-panel')).toBeVisible();
+            await expect(this.cartPanel).toBeVisible();
     }
 
      async finalizePurchase() {
-            await expect(this.page.getByTestId('cart-panel').getByText('Miecz Runiczny (p1)')).toBeVisible();
+            await expect(this.cartPanel.getByText('Miecz Runiczny (p1)')).toBeVisible();
             await this.cartBuyButton.click();
             await expect(this.page.getByText('sukces')).toBeVisible();
     }
